@@ -1,0 +1,93 @@
+.rank_list {
+    margin-top: .2rem;
+    .rank_list__item {
+        display: -webkit-box;
+        -webkit-box-align: center;
+        margin: 0 .16rem .12rem;
+        border-radius: .08rem 0 0 .08rem;
+        .rank_list__bd {
+            -webkit-box-flex: 1;
+            .rank_list__tit {
+                margin: 0 .12rem .04rem .12rem;
+                line-height: .22rem;
+                font-size: .16rem;
+                font-weight: 700;
+            }
+            .rank_song_list {
+                .rank_song_list__item {
+                    margin: 0 .12rem .04rem;
+                    line-height: .16rem;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                }
+            }
+        }
+        .rank_list__media {
+            position: relative;
+            width: 1.07rem;
+            height: 1.07rem;
+            overflow: hidden;
+            border-radius: 0 .08rem .08rem 0;
+            .rank_list__img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: cover;
+            }
+            .rank_list__update {
+                position: absolute;
+                top: 0;
+                left: 0;
+                right: 0;
+                z-index: 2;
+                display: -webkit-box;
+                -webkit-box-pack: end;
+                height: .38rem;
+                padding: .06rem;
+                font-size: .1rem;
+                color: #fff;
+                background-image: -webkit-linear-gradient(top, rgba(0, 0, 0, .4), transparent);
+            }
+            .mui_cover_count {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                z-index: 5;
+                display: -webkit-box;
+                -webkit-box-pack: center;
+                -webkit-box-align: center;
+                height: 17px;
+                min-width: 14px;
+                padding: 0 7px;
+                border-radius: 9px;
+                background: rgba(0, 0, 0, .4);
+                .mui_cover_count__icon {
+                    display: block;
+                    width: 10px;
+                    height: 10px;
+                    background-image: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABQAAAAUCAMAAAC6V+0/AAAAQlBMVEUAAAD///////////////////////////////////////////////////////////////////////////////////8IX9KGAAAAFXRSTlMANKf2EQjsz8aUemg9LSMb29qrT07ELBLNAAAAUklEQVQY053QSQ6AIBBE0bYBxQFwqvtf1bgimkoY/vJtepCmLq/hb9YAmO0XB7yNK0Fg2ggCmgjCLC5jbo8EobV4xKpBmsjypTMde4jc/gzS1wMkNgsYmjY08wAAAABJRU5ErkJggg==);
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                }
+                .mui_cover_count__num {
+                    display: block;
+                    margin-left: 2px;
+                    line-height: normal;
+                    font-size: 11px;
+                    font-weight: 300;
+                    color: #fff;
+                }
+                &::after {
+                    content: "";
+                    position: absolute;
+                    bottom: 0;
+                    right: 0;
+                    width: 100%;
+                    min-width: 40px;
+                    height: 40px;
+                }
+            }
+        }
+    }
+}

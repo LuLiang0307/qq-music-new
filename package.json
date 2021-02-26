@@ -1,0 +1,20 @@
+{
+    "name": "qq-music-new",
+    "version": "1.0.0",
+    "description": "QQ music",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "keywords": [],
+    "author": {
+        "name": "Lucia",
+        "email": "2313970630@qq.com"
+    },
+    "license": "MIT",
+    "dependencies": {
+        "express": "^4.17.1",
+        "request": "^2.88.2",
+        "request-promise": "^4.2.6"
+    }
+}
