@@ -1,5 +1,6 @@
 const express = require('express');
 const request = require('request-promise');
+const cors = require('cors')
 const app = express();
 
 const HEADERS = {
@@ -9,6 +10,7 @@ const HEADERS = {
     'origin': "https://i.y.qq.com",
     'referer': "https://i.y.qq.com/",
 }
+app.use(cors())
 app.get('/', async(req, res) => {
     const url = `https://u.y.qq.com/cgi-bin/musicu.fcg?_=${+new Date()}&data={%22comm%22:{%22g_tk%22:5381,%22uin%22:%22%22,%22format%22:%22json%22,%22inCharset%22:%22utf-8%22,%22outCharset%22:%22utf-8%22,%22notice%22:0,%22platform%22:%22h5%22,%22needNewCode%22:1},%22playSongAd%22:{%22module%22:%22SongPlay.SongPlayBaseServer%22,%22method%22:%22GetPlaySongAd%22,%22param%22:{%22channel%22:3,%22app_user%22:1,%22platform%22:2,%22forbid%22:0,%22share_musicid%22:%22%22,%22encodetype%22:1,%22adtype%22:8}}}`
     try {

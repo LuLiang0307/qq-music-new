@@ -424,6 +424,45 @@ main {
   padding-right: .4rem;
   text-align: left; }
 
+.search_cont .search_result {
+  margin-top: .16rem; }
+  .search_cont .search_result .mui_cell_list {
+    overflow: hidden; }
+    .search_cont .search_result .mui_cell_list .mui_cell_list__item.person .mui_cell_list__img {
+      border-radius: 100%; }
+    .search_cont .search_result .mui_cell_list .mui_cell_list__item {
+      position: relative;
+      margin-bottom: .16rem;
+      padding: 0 .16rem; }
+      .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box {
+        display: -webkit-box;
+        -webkit-box-align: center;
+        min-height: .42rem; }
+        .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box .mui_cell_list__media {
+          position: relative;
+          width: .6rem;
+          height: .6rem;
+          margin-right: .1rem;
+          overflow: hidden; }
+          .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box .mui_cell_list__media .mui_cell_list__img {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            object-fit: cover; }
+        .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box .mui_cell_list__bd {
+          -webkit-box-flex: 1; }
+          .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box .mui_cell_list__bd .mui_cell_list__tit {
+            line-height: .2rem;
+            font-size: .16rem;
+            font-weight: 400; }
+          .search_cont .search_result .mui_cell_list .mui_cell_list__item .mui_cell_list__box .mui_cell_list__bd .mui_cell_list__desc {
+            margin-top: .06rem;
+            line-height: .16rem;
+            font-weight: 300; }
+
 .rank_list {
   margin-top: .2rem; }
   .rank_list .rank_list__item {
