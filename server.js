@@ -37,6 +37,20 @@ app.get('/search', async(req, res) => {
         res.json({ error: e.massage })
     }
 })
+app.get('/lyrics', async(req, res) => {
+    let { id, type = 0 } = req.query
+    const url = `https://c.y.qq.com/lyric/fcgi-bin/fcg_query_lyric.fcg?g_tk=1775699468&uin=2313970630&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&g_tk_new_20200303=1775699468&nobase64=1&musicid=${id}&songtype=${type}&_=${+ new Date()}`
+    try {
+        let text = (await request({
+            url: url,
+            json: true,
+            headers: HEADERS
+        })).replace(/MusicJsonCallback\((.*)\)/, '$1')
+        res.json(JSON.parse(text))
+    } catch (e) {
+        res.json({ error: e.massage })
+    }
+})
 app.listen(4000)
     /* 'https://c.y.qq.com/soso/fcgi-bin/search_for_qq_cp?_=1614270407437&g_tk=5381&uin=&format=json&inCharset=utf-8&outCharset=utf-8&notice=0&platform=h5&needNewCode=1&w=lironghao&zhidaqu=1&catZhida=1&t=0&flag=1&ie=utf-8&sem=1&aggr=0&perpage=20&n=20&p=1&remoteplace=txt.mqq.all' \
       -H 'authority: c.y.qq.com' \
