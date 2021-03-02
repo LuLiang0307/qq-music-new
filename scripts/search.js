@@ -1,9 +1,26 @@
 class Search {
     constructor(el) {
         this.$el = el
+        this.$el[0].addEventListener('click', this.enterSeach.bind(this))
+
         this.$input = this.$el[0].querySelector("#search")
-        this.$songs = this.$el[0].nextElementSibling.querySelector("#songs_list")
         this.$input.addEventListener('keyup', this.onKeyUp.bind(this))
+
+        this.$songs = this.$el[0].nextElementSibling.querySelector('.search_result #songs_list')
+
+        this.$empty = this.$el[0].querySelector('.search_bar__empty')
+        this.$empty.addEventListener('click', this.reset.bind(this, true))
+
+        this.$cancel = this.$el[0].querySelector('.search_bar__cancel')
+        this.$cancel.addEventListener('click', this.cancel.bind(this))
+
+        this.$delete = this.$el[0].nextElementSibling.querySelector('.hot_search__icon_delete')
+        this.$delete.addEventListener('click', this.deleteHistory.bind(this))
+
+        this.$search_result = this.$el[0].nextElementSibling.querySelector('.search_result')
+
+        this.$history = this.$el[0].nextElementSibling.querySelector('.hot_search_history')
+        this.$hot_search = this.$el[0].nextElementSibling.querySelector('.hot_search')
         this.keyword = ''
         this.page = 1
         this.perpage = 20
@@ -14,6 +31,21 @@ class Search {
         this.onscroll = this.onScroll.bind(this)
         window.addEventListener('scroll', this.onscroll)
     }
+    enterSeach(event) {
+        event.currentTarget.classList.add("focus")
+        this.$cancel.style.display = 'block'
+        this.$hot_search.style.display = 'block'
+        this.$el[0].parentNode.nextElementSibling.style.display = 'none'
+        this.$el[0].nextElementSibling.style.display = 'block'
+        let keywordArr = localStorage.getItem('historyList')
+        if (keywordArr) {
+            keywordArr = keywordArr.replace(/\[(.*)\]/, '$1').split(',')
+            if (this.$songs.innerText === '') {
+                this.$history.style.display = "block"
+            }
+            this.insertHistory(keywordArr)
+        }
+    }
     onScroll(event) {
         if (this.nomore) return
         if (document.documentElement.clientHeight + pageYOffset > document.body.scrollHeight - 50) {
@@ -22,15 +54,44 @@ class Search {
     }
     onKeyUp(event) {
         let keyword = event.target.value.trim()
-        if (!keyword) return this.reset()
-        if (event.key !== 'Enter') return
+        if (!keyword) return this.reset(false)
+        if (event.key !== 'Enter') {
+            this.$empty.style.display = 'block'
+            return
+        }
+        this.$hot_search.style.display = 'none'
+        this.$history.style.display = 'none'
+
+        this.insertLocalStorage('"' + keyword + '"')
         this.search(keyword)
     }
-    reset() {
+    insertLocalStorage(el) {
+        let keywordArr = []
+        if (localStorage.getItem('historyList')) {
+            keywordArr = localStorage.getItem('historyList').replace(/\[(.*)\]/, '$1').split(',')
+        }
+        if (keywordArr.indexOf(el) === -1) {
+            keywordArr.push(el)
+        }
+        this.insertHistory(keywordArr)
+        localStorage.setItem('historyList', '[' + keywordArr + ']');
+        return keywordArr
+    }
+    insertHistory(arr) {
+        document.querySelector('.search_cont .hot_search_history .hot_search__bd').innerHTML = arr.map(item =>
+            `<a class="hot_search__item c_txt1 c_bg2" href="javascript:;">${item.replace('\"','').replace('\"','')}</a>`).join('')
+    }
+    reset(deleteAll) {
+        if (deleteAll) {
+            this.$songs.innerHTML = ''
+            this.$input.value = ''
+            this.$hot_search.style.display = 'block'
+            this.$history.style.display = 'block'
+        }
         this.keyword = ''
         this.page = 1
         this.songs = []
-        this.$songs.innerHTML = ''
+        document.querySelector('.search_bar__empty ').style.display = 'none'
     }
     search(keyword, page) {
         if (this.fetching) return
@@ -83,21 +144,20 @@ class Search {
         </li>`).join('')
         this.$songs.insertAdjacentHTML('beforeend', headHtml + html)
     }
+    deleteHistory() {
+        let history = localStorage.getItem('historyList')
+        if (history) {
+            localStorage.removeItem('historyList')
+            this.$history.style.display = 'none'
+        }
+    }
+    cancel(event) {
+        event.stopPropagation()
+        this.$input.value = ''
+        this.$el[0].classList.remove('focus')
+        event.currentTarget.style.display = "none"
+        this.$songs.innerHTML = ''
+        this.$el[0].parentNode.nextElementSibling.style.display = 'block'
+        this.$el[0].nextElementSibling.style.display = 'none'
+    }
 }
-
-/*点击进入搜索页面*/
-$(".search-view").on('click', (e) => {
-    e.currentTarget.classList.add("focus")
-    e.currentTarget.lastElementChild.style.display = 'block'
-    e.currentTarget.parentNode.nextElementSibling.style.display = 'none'
-    e.currentTarget.nextElementSibling.style.display = 'block'
-})
-
-/*点击搜索的取消，回到当前页面*/
-$("#cancel").on('click', function(e) {
-    e.stopPropagation()
-    e.currentTarget.parentNode.classList.remove('focus')
-    e.currentTarget.style.display = "none"
-    e.currentTarget.parentNode.parentNode.nextElementSibling.style.display = 'block'
-    e.currentTarget.parentNode.nextElementSibling.style.display = 'none'
-})

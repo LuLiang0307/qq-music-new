@@ -267,6 +267,9 @@ main {
   color: #1a1a1a;
   background-color: #fff; }
 
+input {
+  -webkit-box-shadow: 0 0 0 1000px white inset; }
+
 .header {
   height: .96rem; }
   .header .header__bd {
@@ -390,6 +393,24 @@ main {
       overflow: hidden;
       -webkit-transform: scale(0.5);
       -webkit-transform-origin: center center; }
+      .search_bar .search_bar__bd .search_bar__empty::before {
+        top: 15px;
+        left: 38px;
+        width: 3px;
+        height: 30px; }
+      .search_bar .search_bar__bd .search_bar__empty::after {
+        top: 28px;
+        left: 25px;
+        width: 30px;
+        height: 3px; }
+    .search_bar .search_bar__bd .search_bar__empty::after,
+    .search_bar .search_bar__bd .search_bar__empty::before {
+      content: "";
+      position: absolute;
+      border-radius: 3px;
+      background: currentColor;
+      opacity: .6;
+      -webkit-transform: rotate(-45deg); }
     .search_bar .search_bar__bd .search_bar__input {
       position: absolute;
       top: 0;
@@ -462,6 +483,78 @@ main {
             margin-top: .06rem;
             line-height: .16rem;
             font-weight: 300; }
+
+.search_cont .hot_search {
+  position: relative;
+  overflow: hidden; }
+  .search_cont .hot_search .hot_search__tit {
+    margin: .16rem .16rem .12rem;
+    font-size: .14rem;
+    font-weight: 700; }
+  .search_cont .hot_search .hot_search__bd {
+    margin: 0 .16rem;
+    font-size: 0; }
+    .search_cont .hot_search .hot_search__bd .hot_search__item {
+      vertical-align: top;
+      display: inline-block;
+      max-width: 2.12rem;
+      height: .24rem;
+      line-height: .24rem;
+      margin: 0 .1rem .1rem 0;
+      padding: 0 .1rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: .12rem;
+      border-radius: .24rem; }
+  .search_cont .hot_search .hot_search__delete {
+    position: absolute;
+    top: .06rem;
+    right: .04rem;
+    width: .4rem;
+    height: .4rem; }
+    .search_cont .hot_search .hot_search__delete .hot_search__icon_delete {
+      display: block;
+      width: .16rem;
+      height: .16rem;
+      margin: .12rem;
+      fill: currentColor; }
+
+.search_cont .hot_search_history {
+  position: relative;
+  overflow: hidden; }
+  .search_cont .hot_search_history .hot_search__tit {
+    margin: .16rem .16rem .12rem;
+    font-size: .14rem;
+    font-weight: 700; }
+  .search_cont .hot_search_history .hot_search__bd {
+    margin: 0 .16rem;
+    font-size: 0; }
+    .search_cont .hot_search_history .hot_search__bd .hot_search__item {
+      vertical-align: top;
+      display: inline-block;
+      max-width: 2.12rem;
+      height: .24rem;
+      line-height: .24rem;
+      margin: 0 .1rem .1rem 0;
+      padding: 0 .1rem;
+      overflow: hidden;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      font-size: .12rem;
+      border-radius: .24rem; }
+  .search_cont .hot_search_history .hot_search__delete {
+    position: absolute;
+    top: .06rem;
+    right: .04rem;
+    width: .4rem;
+    height: .4rem; }
+    .search_cont .hot_search_history .hot_search__delete .hot_search__icon_delete {
+      display: block;
+      width: .16rem;
+      height: .16rem;
+      margin: .12rem;
+      fill: currentColor; }
 
 .rank_list {
   margin-top: .2rem; }

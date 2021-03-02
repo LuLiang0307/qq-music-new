@@ -2,7 +2,7 @@
     fetch('json/rec.json')
         .then(res => res.json())
         .then(render)
-    fetch('json/rank.json')
+    fetch('http://localhost:4000/rank')
         .then(res => res.json())
         .then(renderRank)
 
@@ -10,6 +10,7 @@
         renderOfficialPlaylist(json.homeData.officialPlaylist)
         renderUgcPlaylist(json.homeData.ugcPlaylist)
         renderZoneList(json.homeData.zoneList)
+        renderHotList(json.homeData.hotList)
         lazyload(document.querySelectorAll(".lazyload"))
     }
     let search = new Search(document.querySelectorAll(".search-view"))
@@ -17,6 +18,13 @@
     function renderRank(json) {
         renderRankList(json.topList.data.group)
         lazyload(document.querySelectorAll(".rank_list  .lazyload"))
+    }
+    /*热门搜索*/
+    function renderHotList(list) {
+        let text = list.map(item => `
+        <a class="hot_search__item c_txt1 c_bg2" href="javascript:;">${item.title}</a>
+        `).join('')
+        document.querySelector('.search_cont .hot_search .hot_search__bd').insertAdjacentHTML('beforeend', text)
     }
     /*官方歌单*/
     function renderOfficialPlaylist(list) {

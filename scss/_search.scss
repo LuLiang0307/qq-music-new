@@ -28,6 +28,27 @@
             overflow: hidden;
             -webkit-transform: scale(.5);
             -webkit-transform-origin: center center;
+            &::before {
+                top: 15px;
+                left: 38px;
+                width: 3px;
+                height: 30px;
+            }
+            &::after {
+                top: 28px;
+                left: 25px;
+                width: 30px;
+                height: 3px;
+            }
+        }
+        .search_bar__empty::after,
+        .search_bar__empty::before {
+            content: "";
+            position: absolute;
+            border-radius: 3px;
+            background: currentColor;
+            opacity: .6;
+            -webkit-transform: rotate(-45deg);
         }
         .search_bar__input {
             position: absolute;
@@ -117,6 +138,88 @@
                         }
                     }
                 }
+            }
+        }
+    }
+    .hot_search {
+        position: relative;
+        overflow: hidden;
+        .hot_search__tit {
+            margin: .16rem .16rem .12rem;
+            font-size: .14rem;
+            font-weight: 700;
+        }
+        .hot_search__bd {
+            margin: 0 .16rem;
+            font-size: 0;
+            .hot_search__item {
+                vertical-align: top;
+                display: inline-block;
+                max-width: 2.12rem;
+                height: .24rem;
+                line-height: .24rem;
+                margin: 0 .1rem .1rem 0;
+                padding: 0 .1rem;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: .12rem;
+                border-radius: .24rem;
+            }
+        }
+        .hot_search__delete {
+            position: absolute;
+            top: .06rem;
+            right: .04rem;
+            width: .4rem;
+            height: .4rem;
+            .hot_search__icon_delete {
+                display: block;
+                width: .16rem;
+                height: .16rem;
+                margin: .12rem;
+                fill: currentColor;
+            }
+        }
+    }
+    .hot_search_history {
+        position: relative;
+        overflow: hidden;
+        .hot_search__tit {
+            margin: .16rem .16rem .12rem;
+            font-size: .14rem;
+            font-weight: 700;
+        }
+        .hot_search__bd {
+            margin: 0 .16rem;
+            font-size: 0;
+            .hot_search__item {
+                vertical-align: top;
+                display: inline-block;
+                max-width: 2.12rem;
+                height: .24rem;
+                line-height: .24rem;
+                margin: 0 .1rem .1rem 0;
+                padding: 0 .1rem;
+                overflow: hidden;
+                white-space: nowrap;
+                text-overflow: ellipsis;
+                font-size: .12rem;
+                border-radius: .24rem;
+            }
+        }
+        .hot_search__delete {
+            position: absolute;
+            top: .06rem;
+            right: .04rem;
+            width: .4rem;
+            height: .4rem;
+            .hot_search__icon_delete {
+                display: block;
+                width: .16rem;
+                height: .16rem;
+                margin: .12rem;
+                fill: currentColor;
             }
         }
     }
