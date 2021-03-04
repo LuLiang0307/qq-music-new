@@ -13,7 +13,8 @@
         renderHotList(json.homeData.hotList)
         lazyload(document.querySelectorAll(".lazyload"))
     }
-    let search = new Search(document.querySelectorAll(".search-view"))
+    let search = new Search(document.querySelector(".search-view"))
+    let musicPlayer = new MusicPlayer(document.querySelector(".musicPlayer"))
 
     function renderRank(json) {
         renderRankList(json.topList.data.group)

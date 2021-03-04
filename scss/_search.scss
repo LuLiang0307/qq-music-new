@@ -14,8 +14,9 @@
             left: 50%;
             width: .16rem;
             height: .18rem;
-            margin-left: -.26rem;
+            margin-left: -.1rem;
             fill: currentColor;
+            z-index: 1;
         }
         .search_bar__empty {
             position: absolute;

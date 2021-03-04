@@ -1,26 +1,26 @@
 class Search {
     constructor(el) {
         this.$el = el
-        this.$el[0].addEventListener('click', this.enterSeach.bind(this))
+        this.$el.addEventListener('click', this.enterSeach.bind(this))
 
-        this.$input = this.$el[0].querySelector("#search")
+        this.$input = this.$el.querySelector("#search")
         this.$input.addEventListener('keyup', this.onKeyUp.bind(this))
 
-        this.$songs = this.$el[0].nextElementSibling.querySelector('.search_result #songs_list')
+        this.$songs = this.$el.nextElementSibling.querySelector('.search_result #songs_list')
 
-        this.$empty = this.$el[0].querySelector('.search_bar__empty')
+        this.$empty = this.$el.querySelector('.search_bar__empty')
         this.$empty.addEventListener('click', this.reset.bind(this, true))
 
-        this.$cancel = this.$el[0].querySelector('.search_bar__cancel')
+        this.$cancel = this.$el.querySelector('.search_bar__cancel')
         this.$cancel.addEventListener('click', this.cancel.bind(this))
 
-        this.$delete = this.$el[0].nextElementSibling.querySelector('.hot_search__icon_delete')
+        this.$delete = this.$el.nextElementSibling.querySelector('.hot_search__icon_delete')
         this.$delete.addEventListener('click', this.deleteHistory.bind(this))
 
-        this.$search_result = this.$el[0].nextElementSibling.querySelector('.search_result')
+        this.$search_result = this.$el.nextElementSibling.querySelector('.search_result')
 
-        this.$history = this.$el[0].nextElementSibling.querySelector('.hot_search_history')
-        this.$hot_search = this.$el[0].nextElementSibling.querySelector('.hot_search')
+        this.$history = this.$el.nextElementSibling.querySelector('.hot_search_history')
+        this.$hot_search = this.$el.nextElementSibling.querySelector('.hot_search')
         this.keyword = ''
         this.page = 1
         this.perpage = 20
@@ -35,8 +35,8 @@ class Search {
         event.currentTarget.classList.add("focus")
         this.$cancel.style.display = 'block'
         this.$hot_search.style.display = 'block'
-        this.$el[0].parentNode.nextElementSibling.style.display = 'none'
-        this.$el[0].nextElementSibling.style.display = 'block'
+        this.$el.parentNode.nextElementSibling.style.display = 'none'
+        this.$el.nextElementSibling.style.display = 'block'
         let keywordArr = localStorage.getItem('historyList')
         if (keywordArr) {
             keywordArr = keywordArr.replace(/\[(.*)\]/, '$1').split(',')
@@ -154,10 +154,10 @@ class Search {
     cancel(event) {
         event.stopPropagation()
         this.$input.value = ''
-        this.$el[0].classList.remove('focus')
+        this.$el.classList.remove('focus')
         event.currentTarget.style.display = "none"
         this.$songs.innerHTML = ''
-        this.$el[0].parentNode.nextElementSibling.style.display = 'block'
-        this.$el[0].nextElementSibling.style.display = 'none'
+        this.$el.parentNode.nextElementSibling.style.display = 'block'
+        this.$el.nextElementSibling.style.display = 'none'
     }
 }
