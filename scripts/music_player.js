@@ -1,12 +1,13 @@
 class MusicPlayer {
     constructor(el) {
         this.$el = el
+        console.log(this.$el)
         this.$el.addEventListener('click', this)
-        this.$show_icon = document.querySelector('.top_operation_bar__btn')
-        this.$hide_icon = document.querySelector('.pack_up')
         this.$play_icon = this.$el.querySelector('.play_icon')
         this.$pause_icon = this.$el.querySelector('.pause_icon')
-        this.bindEvent()
+        this.createAudio()
+        this.progress = new ProgressBar(this.$el.querySelector('.player_footer .progress'), 280, true)
+        this.lyrics = new LyricsPlayer(this.$el.querySelector('.player_lyrics'))
     }
     handleEvent(event) {
         let target = event.target
@@ -17,27 +18,33 @@ class MusicPlayer {
             case target.matches('.pause_icon'):
                 this.onPause(event)
                 break
+            case target.matches('.pack_up_icon'):
+                this.hide()
+                break
         }
     }
     createAudio() {
+        this.$audio = document.createElement('audio')
+        this.$audio.id = `player-${Math.floor(Math.random()*100)}-${+ new Date()}`
+        this.$audio.onended = () => {
+            this.$lyrics.restart()
+            this.$progress.restart()
+            console.log('ended')
+        }
+        document.body.appendChild(this.$audio)
+    }
 
-    }
-    bindEvent() {
-        console.log('bindEvent')
-        this.$show_icon.addEventListener('click', this.show.bind(this))
-        this.$hide_icon.addEventListener('click', this.hide.bind(this))
-        this.$play_icon.addEventListener('click', this.play.bind(this))
-        this.$pause_icon.addEventListener('click', this.pause.bind(this))
-    }
-    onPlay() {
-        console.log('play')
+    onPlay(event) {
         this.$pause_icon.style.display = 'block'
         this.$play_icon.style.display = 'none'
+        this.progress.start()
+        this.lyrics.start()
     }
     onPause(event) {
-        console.log('pause')
         this.$play_icon.style.display = 'block'
         this.$pause_icon.style.display = 'none'
+        this.progress.pause()
+        this.lyrics.pause()
     }
     show(event) {
         this.$el.classList.remove('hide')

@@ -2,7 +2,8 @@
     fetch('json/rec.json')
         .then(res => res.json())
         .then(render)
-    fetch('http://localhost:4000/rank')
+        // fetch('http://localhost:4000/rank')
+    fetch('json/rank.json')
         .then(res => res.json())
         .then(renderRank)
 
@@ -14,7 +15,13 @@
         lazyload(document.querySelectorAll(".lazyload"))
     }
     let search = new Search(document.querySelector(".search-view"))
+
     let musicPlayer = new MusicPlayer(document.querySelector(".musicPlayer"))
+    document.querySelector('.top_operation_bar__btn').addEventListener('click', () => {
+        console.log('show')
+        musicPlayer.show()
+    })
+    window.musicPlayer = musicPlayer
 
     function renderRank(json) {
         renderRankList(json.topList.data.group)

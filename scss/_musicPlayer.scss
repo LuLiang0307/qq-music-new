@@ -55,9 +55,9 @@
             .play_icon {
                 width: 40px;
                 height: 40px;
+                display: none;
             }
             .pause_icon {
-                display: none;
                 width: 40px;
                 height: 40px;
             }
@@ -92,21 +92,24 @@
                 font-size: .14rem;
             }
         }
-        .lyrics_lines {
+        .lyrics-wrapper {
+            overflow: hidden;
             display: -webkit-box;
             -webkit-box-orient: vertical;
             -webkit-box-align: center;
-            .lyrics_line {
-                line-height: 2.5;
-                margin: 0 .2rem;
-                text-align: center;
-                overflow: hidden;
-                white-space: nowrap;
-                text-overflow: ellipsis;
-                font-size: .14rem;
-                color: rgba(0, 0, 0, .9);
-                &.active {
-                    color: #31c27c;
+            .lyrics_lines {
+                .lyrics_line {
+                    line-height: 2.5;
+                    margin: 0 .2rem;
+                    text-align: center;
+                    overflow: hidden;
+                    white-space: nowrap;
+                    text-overflow: ellipsis;
+                    font-size: .14rem;
+                    color: rgba(0, 0, 0, .9);
+                    &.active {
+                        color: #31c27c;
+                    }
                 }
             }
         }
@@ -172,7 +175,7 @@
         width: 100%;
         background-size: cover;
         background-position: bottom center;
-        filter: blur(10px);
+        // filter: blur(10px);
         // transform: scale(1.15);
     }
 }
