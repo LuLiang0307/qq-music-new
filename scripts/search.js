@@ -1,4 +1,6 @@
-class Search {
+import { searchUrl } from './helpers.js'
+
+export class Search {
     constructor(el) {
         this.$el = el
         this.$el.addEventListener('click', this.enterSeach.bind(this))
@@ -55,7 +57,7 @@ class Search {
     onKeyUp(event) {
         let keyword = event.target.value.trim()
         if (!keyword) return this.reset(false)
-        if (event.key !== 'Enter') {
+        if (event.keyCode !== 13) {
             this.$empty.style.display = 'block'
             return
         }
@@ -91,13 +93,13 @@ class Search {
         this.keyword = ''
         this.page = 1
         this.songs = []
-        document.querySelector('.search_bar__empty ').style.display = 'none'
+        document.querySelector('.search_bar__empty').style.display = 'none'
     }
     search(keyword, page) {
         if (this.fetching) return
         this.keyword = keyword
         this.fetching = true
-        fetch(`http://localhost:4000/search?keyword=${this.keyword}&page=${page ||this.page}`)
+        fetch(searchUrl(this.keyword, page || this.page))
             .then(res => res.json())
             .then(json => {
                 this.page = json.data.song.curpage
@@ -131,8 +133,10 @@ class Search {
         </li>`
         }
 
-        let html = songs.map(song => `
-        <li class="mui_cell_list__item">
+        let html = songs.map(song => {
+            let artist = song.singer.map(s => s.name).join(' ')
+            return `<a class="mui_cell_list__item" 
+        href="#player?artist=${artist}&songmid=${song.songmid}&songid=${song.songid}&songname=${song.songname}&albummid=${song.albummid}&duration=${song.interval}">
             <div class="mui_cell_list__box">
                 <div class="mui_cell_list__bd">
                     <h3 class="mui_cell_list__tit c_txt1">${song.songname}</h3>
@@ -141,7 +145,8 @@ class Search {
                     </p>
                 </div>
             </div>
-        </li>`).join('')
+        </a>`
+        }).join('')
         this.$songs.insertAdjacentHTML('beforeend', headHtml + html)
     }
     deleteHistory() {

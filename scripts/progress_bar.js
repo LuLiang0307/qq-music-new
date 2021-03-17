@@ -1,4 +1,4 @@
-class ProgressBar {
+export class ProgressBar {
     constructor(el, duration, start) {
         this.$el = el
         this.elapsed = 0
@@ -17,6 +17,10 @@ class ProgressBar {
     }
     pause() {
         clearInterval(this.intervalId)
+    }
+    restart() {
+        this.reset()
+        this.start()
     }
     update() {
         this.elapsed += 0.05

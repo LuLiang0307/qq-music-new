@@ -1,27 +1,41 @@
-function lazyload(images) {
+export function lazyload(images) {
     // console.log(images)//这样获取的节点的prototype是NodeList类型的
-    let imgs = [].slice.call(images) //转成array类型，或者用Array.from(images),不过这个是ES6的语法
-    let onscroll = throttle(function() {
-        if (imgs.length === 0) {
-            return window.removeEventListener("scroll", onscroll); //如果不存在这样的
-        }
-        imgs = imgs.filter(img => img.classList.contains("lazyload")); //只对含有lazyload的元素进行判断
-        imgs.forEach((img) => {
-            if (inViewport(img)) {
-                loadImage(img)
-            }
-        })
-    }, 300)
-    let isTouchDevice = 'ontouchstart' in document.documentElement;
-    if (isTouchDevice) {
-        window.addEventListener('touchmove', onscroll)
-        window.dispatchEvent(new Event('touchmove'))
+    let imgs = [].slice.call(images || document.querySelectorAll('.lazyload')) //转成array类型，或者用Array.from(images),不过这个是ES6的语法
+
+    if ('IntersectionObserver' in window) {
+        let observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.intersectionRatio > 0) {
+
+                    loadImage(entry.target, () => {
+                        observer.unobserve(entry.target)
+                    })
+                }
+            })
+        }, { threshold: 0.01 })
+
+        imgs.forEach(img => observer.observe(img))
     } else {
-        window.addEventListener('mouseup', onscroll)
-        window.dispatchEvent(new Event('mouseup'))
+        let onscroll = throttle(function() {
+            if (imgs.length === 0) {
+                return window.removeEventListener("scroll", onscroll); //如果不存在这样的
+            }
+            imgs = imgs.filter(img => img.classList.contains("lazyload")); //只对含有lazyload的元素进行判断
+            imgs.forEach((img) => {
+                if (inViewport(img)) {
+                    loadImage(img)
+                }
+            })
+        }, 300)
+        let isTouchDevice = 'ontouchstart' in document.documentElement;
+        if (isTouchDevice) {
+            window.addEventListener('touchmove', onscroll)
+            window.dispatchEvent(new Event('touchmove'))
+        } else {
+            window.addEventListener('mouseup', onscroll)
+            window.dispatchEvent(new Event('mouseup'))
+        }
     }
-
-
 }
 
 function throttle(func, wait) {

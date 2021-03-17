@@ -454,6 +454,7 @@ input {
     .search_cont .search_result .mui_cell_list .mui_cell_list__item.person .mui_cell_list__img {
       border-radius: 100%; }
     .search_cont .search_result .mui_cell_list .mui_cell_list__item {
+      display: block;
       position: relative;
       margin-bottom: .16rem;
       padding: 0 .16rem; }
@@ -689,9 +690,9 @@ input {
       height: 40px; }
       .musicPlayer .palyer_header .player_icon .play_icon {
         width: 40px;
-        height: 40px;
-        display: none; }
+        height: 40px; }
       .musicPlayer .palyer_header .player_icon .pause_icon {
+        display: none;
         width: 40px;
         height: 40px; }
   .musicPlayer .player_lyrics {
