@@ -6,13 +6,12 @@
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "dev": "webpack --mode development",
-        "build": "webpack --mode production"
+        "build": "webpack --mode production",
+        "start": "nodemon server.js",
+        "dist": "node-sass --output-style compressed scss/app.scss > dist/app.css && webpack ./scripts/app.js -o dist/app.js "
     },
     "keywords": [],
-    "author": {
-        "name": "Lucia",
-        "email": "2313970630@qq.com"
-    },
+    "author": "Lucia <2313970630@qq.com>",
     "license": "MIT",
     "dependencies": {
         "cors": "^2.8.5",
@@ -21,6 +20,22 @@
         "request-promise": "^4.2.6"
     },
     "devDependencies": {
+        "babel-core": "^6.26.3",
+        "babel-loader": "^8.2.2",
+        "babel-preset-env": "^1.7.0",
+        "postcss": "^8.2.8",
+        "postcss-loader": "^5.2.0",
+        "sass": "^1.32.8",
+        "sass-loader": "^11.0.1",
+        "webpack": "^5.26.3",
         "webpack-cli": "^4.5.0"
-    }
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/LuLiang0307/qq-music-new.git"
+    },
+    "bugs": {
+        "url": "https://github.com/LuLiang0307/qq-music-new/issues"
+    },
+    "homepage": "https://github.com/LuLiang0307/qq-music-new#readme"
 }
